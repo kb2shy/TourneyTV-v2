@@ -1,5 +1,13 @@
 const express = require('express');
 const app = express();
+const mongoose = require('mongoose');
+
+require('dotenv').config();
+
+// Connect to DB
+mongoose.connect(`${process.env.MONGODB_URL}`, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
+    console.log("connected to db")
+})
 
 // import routes
 const authRoute = require('./routes/auth');
