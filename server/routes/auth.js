@@ -1,19 +1,11 @@
 const router = require('express').Router();
 const User = require('../model/User');
-
-// Validation
-const Joi = require('@hapi/joi');
-
-const schema = Joi.object({
-    name: Joi.string().min(6).required(),
-    email: Joi.string().min(6).required().email(),
-    password: Joi.string().min(6).required()
-})
+const { registerValidation, loginValidation } = require('../validation');
 
 router.post('/register', async (req, res) => {
 
     // Let's validate the data before we make a user
-    const {error , value} = schema.validate(req.body);
+    const { error } = registerValidation(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
     const user = new User({
