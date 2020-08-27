@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
     name: {
-        first : {
+        first: {
             type: String,
             required: true,
         },
@@ -30,9 +30,11 @@ const userSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    chatroomSubscriptions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Chatroom'}],
-    teams: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Team'}],
-    
+    chatroomSubscriptions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Chatroom' }],
+    teams: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Team' }],
+    isAdmin: { type: Boolean, default: false },
+    playerId: { type: Number },
+    img: { type: Buffer },
 },
     {
         timestamps: true
